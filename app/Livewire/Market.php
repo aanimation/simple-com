@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ProductList extends Component
+class Market extends Component
 {
     public function addToCart(Product $product)
     {
@@ -34,6 +34,6 @@ class ProductList extends Component
 
     public function render()
     {
-        return view('livewire.product-list', $this->getData());
+        return view('livewire.market', $this->getData());
     }
 }
