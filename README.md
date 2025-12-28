@@ -48,7 +48,7 @@ routes/console.php
 (as per Laravel 12+ best practices)
 
 ## Setup Instructions
-1. Clone Repository
+1. Clone Repository https://github.com/aanimation/simple-com
 ```
 git clone <repository-url>
 cd <project>
