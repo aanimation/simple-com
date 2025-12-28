@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Models\User;
-use App\Observers\UserObserver;
+use App\Models\{User, CartItem};
+use App\Observers\{UserObserver, CartItemObserver};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         User::observe(UserObserver::class);
+        CartItem::observe(CartItemObserver::class);
     }
 }
