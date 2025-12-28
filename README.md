@@ -1,32 +1,105 @@
-# Laravel + Livewire Starter Kit
+# Simple E-Commerce Shopping Cart (Laravel + Livewire)
 
-## Introduction
+This project is a simple e-commerce shopping cart system built as part of a technical assessment.
 
-Our Laravel + [Livewire](https://livewire.laravel.com) starter kit provides a robust, modern starting point for building Laravel applications with a Livewire frontend.
+It allows authenticated users to browse products, manage a shopping cart, and demonstrates backend concepts such as queues, jobs, observers, and scheduled tasks.
 
-Livewire is a powerful way of building dynamic, reactive, frontend UIs using just PHP. It's a great fit for teams that primarily use Blade templates and are looking for a simpler alternative to JavaScript-driven SPA frameworks like React and Vue.
+## Tech Stack
 
-This Livewire starter kit utilizes Livewire 3, Laravel Volt (optionally), TypeScript, Tailwind, and the [Flux UI](https://fluxui.dev) component library.
+* Backend: Laravel 12
+* Frontend: Livewire
+* Styling: Tailwind CSS
+* Database: MySQL
+* Queue: Database
+* Mail: Log mailer
+* Auth: Laravel Livewire Starter Kit (Fortify)
 
-If you are looking for the alternate configurations of this starter kit, they can be found in the following branches:
+## Features
 
-- [components](https://github.com/laravel/livewire-starter-kit/tree/components) - if Volt is not selected
-- [workos](https://github.com/laravel/livewire-starter-kit/tree/workos) - if WorkOS is selected for authentication
+- User authentication (Laravel starter kit)
+- Product listing
+- User-based shopping cart (persisted in database, not session)
+- Add, update, and remove cart items
+- Automatic stock management
+- Low stock email notification (queued job)
+- Daily sales report email (scheduled job)
+- Design Decisions
+- Each user has exactly one cart, created automatically via a UserObserver.
+- Business logic (stock updates, notifications) is handled via Observers, keeping UI components thin.
+- Cart and Order are separated to avoid mixing transient cart data with reporting data.
+- Jobs and scheduling are used for asynchronous tasks as required.
+- Two-Factor Authentication was disabled to keep focus on core domain logic.
+- Low Stock Notification
+- Triggered when product stock reaches a defined threshold.
+- Implemented as a queued job (LowStockNotificationJob).
+- Email is sent to a dummy admin user (admin@example.com).
 
-## Official Documentation
+## Daily Sales Report
 
-Documentation for all Laravel starter kits can be found on the [Laravel website](https://laravel.com/docs/starter-kits).
+* Implemented as a scheduled queued job.
+* Runs daily at 20:00.
+* Aggregates products sold for the current day.
+* Sends a summary email to the dummy admin user.
+* Scheduler is defined in:
 
-## Contributing
+```
+routes/console.php
+```
+(as per Laravel 12+ best practices)
 
-Thank you for considering contributing to our starter kit! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Setup Instructions
+1. Clone Repository
+```
+git clone <repository-url>
+cd <project>
+```
 
-## Code of Conduct
+2. Install Dependencies
+```
+composer install
+npm install && npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. Environment Setup
+```
+cp .env.example .env
+php artisan key:generate
+```
 
-## License
+Update .env:
+```
+QUEUE_CONNECTION=database
+MAIL_MAILER=log
+```
 
-The Laravel + Livewire starter kit is open-sourced software licensed under the MIT license.
-# simple-com
-# simple-com
+4. Run Migrations & Seeders
+```
+php artisan migrate --seed
+```
+
+Seeded data includes:
+
+Dummy admin user: admin@example.com / password
+
+Sample products
+
+5. Run Queue & Scheduler
+```
+php artisan queue:work
+php artisan schedule:work
+```
+
+Emails can be viewed in:
+```
+storage/logs/laravel-{date}.log
+```
+
+## Assumptions
+
+- Checkout is simulated by creating Order and OrderItem records.
+- Reporting is based on OrderItem data.
+- This project focuses on architecture and best practices rather than UI polish.
+
+### Time Spent
+
+Approximately 6–8 hours, focusing on clarity, correctness, and Laravel best practices.
