@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\CartItem;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class Cart extends Component
@@ -26,6 +27,15 @@ class Cart extends Component
     public function remove(CartItem $item)
     {
         $item->delete();
+    }
+
+    public function makeOrder($total)
+    {
+        Order::updateOrCreate([
+            'user_id' => Auth::id(),
+        ],[
+            'total_price' => $total
+        ]);
     }
 
     protected function getData()

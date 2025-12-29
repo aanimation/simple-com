@@ -24,6 +24,11 @@ class Market extends Component
         );
 
         $this->dispatch('cartUpdated');
+
+        /**
+         * For test only
+         */
+        // \App\Jobs\DailySalesReportJob::dispatch();
     }
 
     protected function getData()

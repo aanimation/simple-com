@@ -91,10 +91,10 @@
                 </div>
             </dl>
 
-            <button
+            <button wire:click="makeOrder({{ $total }})"
                 class="mt-6 w-full rounded-lg bg-indigo-600 py-3 text-white font-medium hover:bg-indigo-700 transition"
             >
-                Checkout
+                Make Order
             </button>
         </div>
     </div>
