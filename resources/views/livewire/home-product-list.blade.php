@@ -1,5 +1,5 @@
 <div class="bg-dark">
-  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+  <div class="mx-auto max-w-2xl p-4 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8">
     <h2 class="text-2xl font-bold tracking-tight text-gray-500">Products</h2>
 
     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -14,7 +14,7 @@
                 </h3>
                 <p class="mt-1 text-sm text-gray-300">{{ $product->name }}</p>
             </div>
-            <p class="text-sm font-medium text-gray-400">$35</p>
+            <p class="text-sm font-medium text-gray-400">${{ $product->price }}</p>
             </div>
         </a>
         @endforeach

@@ -9,7 +9,7 @@ class LoginResponse implements LoginResponseContract
 {
     public function toResponse($request)
     {
-        if (Auth::user()->email === 'admin@example.com') {
+        if (Auth::user()->is_admin) {
             return redirect()->intended('/dashboard');
         }
 

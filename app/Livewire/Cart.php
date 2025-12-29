@@ -11,6 +11,8 @@ class Cart extends Component
     public function increment(CartItem $item)
     {
         $item->increment('quantity');
+        // $item->load('product');
+        // $item->product->decrement('stock_quantity');
     }
 
     public function decrement(CartItem $item)
@@ -21,10 +23,14 @@ class Cart extends Component
         }
 
         $item->decrement('quantity');
+        // $item->load('product');
+        // $item->product->increment('stock_quantity');
     }
 
     public function remove(CartItem $item)
     {
+        // $item->load('product');
+        // $item->product->increment('stock_quantity', $item->quantity);
         $item->delete();
     }
 

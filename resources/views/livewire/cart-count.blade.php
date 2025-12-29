@@ -1,0 +1,1 @@
+<span class="text-xs text-white:70"> | {{ $count }} item(s)</span>

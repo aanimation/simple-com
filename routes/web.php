@@ -4,19 +4,30 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
-use App\Livewire\Market;
+use App\Livewire\{Cart, Market};
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('front');
 })->name('home');
 
-Route::view('dashboard', 'dashboard')
+
+Route::get('dashboard', function () {
+        if (! Auth::user()?->is_admin) {
+            return redirect()->route('market');
+        }
+        return view('dashboard');
+    })
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 Route::get('/market', Market::class)
     ->middleware(['auth', 'verified'])
     ->name('market');
+
+Route::get('/my-cart', Cart::class)
+    ->middleware(['auth', 'verified'])
+    ->name('cart');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

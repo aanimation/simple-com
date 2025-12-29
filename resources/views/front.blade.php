@@ -26,13 +26,13 @@
         @livewireStyles
     </head>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        {{-- <x-navigation /> --}}
+        <x-navigation />
 
         <div class="container">
             <livewire:home-product-list />
         </div>
 
-         <div class="bg-gray-900 py-4 sm:py-4 w-full">
+         <div class="fixed bottom-0 bg-gray-900 py-4 sm:py-4 w-full">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <h2 class="text-center text-lg/8 font-semibold text-white">Trusted by the world’s most innovative teams</h2>
                 <div class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">

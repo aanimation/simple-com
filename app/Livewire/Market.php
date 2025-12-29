@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class Market extends Component
 {
-    public function addToCart(Product $product)
+    public function addToCart($productId)
     {
+        $product = Product::find($productId);
         $cart = Auth::user()->cart;
 
         if ($product->stock_quantity < 1) {
@@ -19,10 +20,10 @@ class Market extends Component
 
         $cart->items()->updateOrCreate(
             ['product_id' => $product->id],
-            ['quantity' => DB::raw('quantity + 1')]
+            ['quantity' => DB::raw('cart_items.quantity + 1')]
         );
 
-        $product->decrement('stock_quantity');
+        $this->dispatch('cartUpdated');
     }
 
     protected function getData()
