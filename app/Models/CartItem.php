@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CartItem extends Model
 {
+    protected $guarded = ['id'];
+
     public function cart(): BelongsTo
     {
         return $this->belongsTo(Cart::class);
