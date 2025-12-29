@@ -20,7 +20,6 @@ class OrderObserver
      */
     public function updated(Order $order): void
     {
-        dd('ss');
         $this->fillOrderItems($order);
     }
 
